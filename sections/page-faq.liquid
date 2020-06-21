@@ -1,0 +1,51 @@
+<div class="SectionHeader__Description">
+    <h2 class="SectionHeader__Heading Heading u-h1">{{ section.settings.title | escape }}</h2>
+    {{ section.settings.answer }}
+</div>
+<div class="SectionHeader__Description">
+    <h2 class="SectionHeader__Heading Heading u-h1">{{ section.settings.title | escape }}</h2>
+    {{ section.settings.answer }}
+</div>
+{% schema %}
+{
+  "name": "Image with text overlay",
+  "settings": [
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay",
+      "default": "#000000"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Sub-heading"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Tell your story"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Text",
+      "default": "<p>Add your own custom content to give more information about your store, availability details...</p>"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Image",
+      "name": "Faq section",
+      "settings": {}
+    }
+  ]
+}
+{% endschema %}

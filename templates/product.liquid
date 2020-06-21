@@ -1,0 +1,479 @@
+{% section 'product-template' %}
+{% assign view = "productimize" %}
+<div class="pz-cp-container">
+      <button class="close-cp">x</button>  
+        <div class="pz-cp-steps-start">
+            <div class="pz-cp-st-content">
+                <div class="pz-cp-start">
+                    <div class="pz-cp-st-image">
+                        <img src="https://cdn.shopify.com/s/files/1/0328/6325/6707/files/logo.png?v=1580972823">
+                    </div>
+                    <div class="pz-cp-st-cont">
+                        <p>Build, customize, and price your next garage door.</p>
+                        <button class="bttn pz-start">Start</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pz-cp-steps-serving">
+            <div class="pz-cp-st-content">
+                <div class="pz-cp-serving">
+                    <div class="pz-cp-se-content">
+                        <h3>
+                       Who do we have the pleasure of serving today? 
+                        </h3>
+                        <form id="contactForm12" name="contactform" action="" method="">
+                            <input type="text" name="name" id="name" class="contactinput" placeholder="Name:">
+                            <span class="loginError" style="display:none;">please enter your name.</span>
+                            <input type="email" name="email" id="email" class="contactinput" placeholder="Email:">
+                            <span class="loginError" style="display:none;">please enter your email.</span>
+                            <input type="phone" name="phone" id="phone" class="contactinput" placeholder="Phone:">
+                            <span class="loginError" style="display:none;">please enter your phone.</span>
+                            <input type="text" name="city" id="city" class="contactinput" placeholder="City:">
+                            <span class="loginError" style="display:none;">please enter your city.</span>
+                            <button class="bttn pz-serving">Start Building My Garage Door Now</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="pz-cp-steps-measure">
+            <div class="pz-cp-st-content">
+                <div class="pz-cp-measure">
+                    <div class="pz-cp-m-content">
+                        <h3>
+                       Do you have your garage door opening measurements?
+                        </h3>
+                        <div class="pz-cp-m-cont">
+                            <div class="pz-cp-m-y">
+                                <button class="bttn pz-m-y" >Yes | Input Measurements Now</button>
+                                <p>Adding measurements will allow you to design and price your garage door accurately.</p>
+                            </div>
+                            <div class="pz-cp-m-n">
+                                <button class="bttn pz-m-n" ><a href="{{shop.url}}{{product.url }}?view={{view}}" class="engrave">No | Skip To Garage Door Designer</a></button>
+                                <p>Skipping measurements will assume standard garage door measurements and standard pricing.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!-- <div class="pz-cp-steps-size1">
+            <div class="pz-cp-st-content">
+                <div class="pz-cp-size">
+                    <div class="pz-cp-sz-content">
+                        <h3>
+                            Just a few inputs and you'll be ready to design!
+                        </h3>
+                      <form id="sizemesure">
+                        <div class="pz-cp-sz-cont">
+                            <div class="pz-cp-sz-doors">
+                                <div class="pz-cp-sz-door">
+                                    <div class="pz-cp-sz-bl" id="door1" val="" >
+                                        <label for="">Left Side: <span>i</span> </label>
+                                        <div class="pz-cp-sz-ft">
+                                            <input type="number" step="0.5" min="0.5" max="70"  name="door_1_left_feet" class='left_feet size_measure_1' id=""><span>ft.</span>
+                                        </div>
+                                        <div class="pz-cp-sz-ft">
+                                            <input type="number" step="1" min="0" max="12" name="door_1_left_inch" class='left_inch size_measure_1' id=""><span>in.</span>
+                                        </div>
+                                    </div>
+                                    <div class="pz-cp-sz-bl">
+                                        <label for="">Right Side: <span>i</span> </label>
+                                        <div class="pz-cp-sz-ft">
+                                            <input type="number" step="0.5" min="0.5" max="70" name="door_1_right_feet" class='right_feet size_measure_1' id=""><span>ft.</span>
+                                        </div>
+                                        <div class="pz-cp-sz-ft">
+                                            <input type="number" step="1" min="0" max="12" name="door_1_right_inch" class='right_inch size_measure_1' id=""><span>in.</span>
+                                        </div>
+                                    </div>
+                                    <div class="pz-cp-sz-bl">
+                                        <label for="">Header: <span>i</span> </label>
+                                        <div class="pz-cp-sz-ft">
+                                            <input type="number" step="0.5" min="0.5" max="70" name="door_1_header_feet"class='header_feet size_measure_1'  id=""><span>ft.</span>
+                                        </div>
+                                        <div class="pz-cp-sz-ft">
+                                            <input type="number" step="1" min="0" max="12" name="door_1_header_inch"class='header_inch size_measure_1'  id=""><span>in.</span>
+                                        </div>
+                                    </div>
+                                    <div class="pz-cp-sz-bl">
+                                        <label for="">Stem wall: <span>i</span> </label>
+                                        <div class="pz-cp-sz-ft">
+                                            <input type="number" step="0.5" min="0.5" max="70" name="door_1_stemwall_feet" class='stemwall_feet size_measure_1' id=""><span>ft.</span>
+                                        </div>
+                                        <div class="pz-cp-sz-ft">
+                                            <input type="number" step="1" min="0" max="12" name="door_1_stemwall_inch" class='stemwall_inch size_measure_1' id=""><span>in.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          <input type="hidden" name="size_measure_json" id="size_measure_json" />
+                            <div class="pz-cp-sz-designer">
+                                <button class="bttn pz-sz-an">I HAVE ANOTHER DOOR</button>
+                                <button class="bttn pz-sz-gtd" ><a href="{{shop.url}}{{product.url }}?view={{view}}" class="engrave">GO TO DESIGNER</a></button>
+                            </div>
+                        </div>
+                      </form>  
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="pz-custom-door-design-wrapper">
+    <div class="pz-custom-door-designer">
+      <div class="pz-custom-door-measurement pz-cp-steps-sizes">
+        <div class="pz-custom-door-measurement-content">
+          <div class="pz-door-measure-cover">
+            <div class="pz-door-measure-content">
+              <h3 class="pz-door-measure-content-title">Before you begin, <br/> let's input your garage door
+                measurements</h3>
+              <div class="pz-door-measurements">
+                <p class="pz-door-measurement-text">How many garage doors do you have?</p>
+                <div class="pz-custom-dropdown">
+                  <button class="pz-door-measure-count"><span class="measure-count-selected">1</span> <span class="pz-dropdown-icon"></span></button>
+                  <!-- make class "active" to display <ul class="active"> -->
+                  <ul class="select-door-count">
+                    <li class="active">
+                      1
+                    </li>
+                    <li>
+                      2
+                    </li>
+                    <li>
+                      3
+                    </li>
+                    <li>
+                      4
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="pz-door-measurement-inputs">
+                <div class="pz-door-list">
+                  <ul id="doorList">
+                    <li><button class="active" id="d1-li">Door 1</button></li>
+                    <li><button id="d2-li" disabled>Door 2</button></li>
+                    <li><button id="d3-li" disabled>Door 3</button></li>
+                    <li><button id="d4-li" disabled>Door 4</button></li>
+                  </ul>
+                </div>
+                <div id="d1" class="pz-door-standard-size">
+                <div>
+                 <div class="pz-door-standard-size-radio">
+                  <label class="pz-custom-radio">Standard 8' x 7'
+                                     <input type="radio" checked="checked" name="doorsize">
+                                     <span class="checkmark"></span>
+                                   </label>
+                                   <label class="pz-custom-radio">Standard 16' x 7'
+                                     <input type="radio" name="doorsize">
+                                     <span class="checkmark"></span>
+                                   </label>
+                 </div>
+
+                 <div class="pz-door-standard-size-radio">
+                  <label class="pz-custom-radio">Standard 10' x 7'
+                    <input type="radio" name="doorsize">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="pz-custom-radio">Standard 12' x 7'
+                    <input type="radio" name="doorsize">
+                    <span class="checkmark"></span>
+                  </label>
+                  </div>
+
+                  <label class="pz-custom-radio custom-size">Custom Size <i>(Input measurements below)</i>
+                    <input type="radio" name="doorsize">
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+                <div class="pz-door-custom-size hide">
+                  <div class="pz-custom-door-width">
+                    <span>Width:</span>
+                    <div class="pz-custom-dropdown">
+                      <button class="pz-door-width">8' <span class="pz-dropdown-icon"></span></button>
+                      <ul class="door-width">
+                        <li>
+                          9'
+                        </li>
+                        <li>
+                          10'
+                        </li>
+                        <li>
+                          12'
+                        </li>
+                        <li>
+                          14'
+                        </li>
+                        <li>
+                          15'
+                        </li>
+                        <li>
+                          16'
+                        </li>
+                        <li>
+                          17'
+                        </li>
+                        <li>
+                          18'
+                        </li>
+                        <li>
+                          20'
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="pz-custom-door-width">
+                    <span>Height:</span>
+                    <div class="pz-custom-dropdown">
+                      <button class="pz-door-height">7' <span class="pz-dropdown-icon"></span></button>
+                      <ul class="door-height">
+                        <li>
+                          8'
+                        </li>
+                        <li>
+                          9'
+                        </li>
+                        <li>
+                          10'
+                        </li>
+                        <li>
+                          12'
+                        </li>
+                        <li>
+                          14'
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+               <div class="pz-measure-design-now-button">
+                    <button class="pz-measure-design-now">Design Now</button>
+              </div>
+            </div>
+          </div>
+          <div class="pz-door-measure-guide-cover">
+            <div class="pz-door-measure-guide-content">
+              <h3 class="pz-door-measure-guide-title">Need help measuring your <br> garage door correctly?
+              </h3>
+              <div class="pz-door-measure-guide-download">
+                <button class="pz-door-design-watch">Watch Now</button>
+                <button class="pz-door-design-download">Download Guide</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<input type="hidden" id="pz-serving-value" value="" />
+{% section 'product-recommendations' %}
+{% section 'recently-viewed-products' %}
+
+<style>
+  .hide{
+    display:none;
+  }
+</style>
+
+<script>
+  window.ShopifyXR=window.ShopifyXR||function(){(ShopifyXR.q=ShopifyXR.q||[]).push(arguments)};
+  ShopifyXR('addModels', {{ product.media | where: 'media_type', 'model' | json }});
+
+</script>
+
+<script>
+  var doorOptions = {};
+  
+  $(".pz-custom-radio").on("click", function(){
+    var activeDoor = $("#doorList button.active").html();
+  	doorOptions[activeDoor] = {};
+    if($(this).hasClass("custom-size")){
+      $(".pz-door-custom-size").removeClass("hide");
+      doorOptions[activeDoor]["customSize"] = {"width": $(".pz-door-width").text().trim(), "height": $(".pz-door-height").text().trim() }
+      $("#pz-serving-value").val(JSON.stringify(doorOptions));
+    } else {
+      doorOptions[activeDoor] = $(this).text().trim();
+      $("#pz-serving-value").val(JSON.stringify(doorOptions));
+    }
+  })
+  $("#doorList button").on("click", function(){
+    $(this).parents(".pz-door-list").find("button").removeClass("active");
+    $(this).addClass("active");
+    var selectedData = $.parseJSON($("#pz-serving-value").val());
+    if(typeof selectedData[$(this).html()] == 'string'){
+    $("label:contains("+selectedData[$(this).html()]+")").closest(".pz-custom-radio").find(":radio").prop('checked', true);
+    }else {
+        var customSize = Object.values(selectedData[$(this).html()]);
+           var width = customSize[0].width;
+           var height = customSize[0].height;
+           $(".pz-door-width").text(width)
+           $(".pz-door-height").text(height)
+        $(".custom-size").closest(".pz-custom-radio").find(":radio").prop('checked', true);
+    }
+  })
+  
+  $(".pz-measure-design-now").on("click", function(){
+    var url = new URL(window.location.href);
+    var search_params = url.searchParams;
+    search_params.set('view', 'productimize');
+    search_params.set('door_inputs', $("#pz-serving-value").val());
+    url.search = search_params.toString();
+    var  new_url = url.toString();
+    window.location.href = new_url;
+  })
+  
+  $('.close-cp').click(function(){
+    $('.pz-cp-container').css('display', 'none')
+    $(this).css('display', 'none')
+    a = $(this).siblings();
+    $.each(a, function(i, valuesof){
+      $(valuesof).first('div').css('display', 'none');
+    })
+  });
+
+  $('.customizeproduct').click(function(e){
+    e.preventDefault()
+    $('.pz-cp-container').css('display', 'block');
+    $('.close-cp').css('display', 'block');
+    $('.close-cp').siblings().first('div').css('display' , 'block');
+  })
+
+  $('.pz-start').on('click', function(){
+    $('.pz-cp-steps-start').css('display','none');
+    $('.pz-cp-steps-sizes').css('display','block');});
+
+  $('.pz-serving').click(function(e){
+    e.preventDefault()
+    $('.pz-cp-steps-serving').css('display','none')
+    $('.pz-cp-steps-sizes').css('display','none')
+  });
+  //   New Size measure //
+
+  $(".pz-sz-gtd").click(function(e){
+    e.preventDefault()
+    var door_count = $(".left_inch").length,
+        final_json = {},
+        temp_left,temp_right,temp_header,temp_stemwall ;
+    for(i=1;i<=door_count;i++){
+      temp_left = [$(".size_measure_"+i+".left_feet").val(),$(".size_measure_"+i+".left_inch").val()];
+      temp_right = [$(".size_measure_"+i+".right_feet").val(),$(".size_measure_"+i+".right_inch").val()];
+      temp_header = [$(".size_measure_"+i+".header_feet").val(),$(".size_measure_"+i+".header_inch").val()];
+      temp_stemwall = [$(".size_measure_"+i+".stemwall_feet").val(),$(".size_measure_"+i+".stemwall_inch").val()];
+      final_json[i] = {"left":temp_left,"right":temp_right,"header":temp_header,"sitewall":temp_stemwall};
+    }
+    $("#size_measure_json").val(final_json);
+  });
+  $(document).ready(function(){
+    $(".pz-door-custom-size").css("display", "none");
+    var activeDoor = $("#doorList button.active").html();
+    doorOptions[activeDoor] = {};
+    var defaultDoor = $('input[name="doorsize"]:checked');
+    doorOptions[activeDoor] = defaultDoor.length ==1 ? $(defaultDoor).parent(".pz-custom-radio").text().trim() : "";
+    $("#pz-serving-value").val(JSON.stringify(doorOptions));
+    $('.leftdoorval').on('keypress',function(){
+      var a = $(thist).val();
+      $(this).parents().find('.pz-cp-sz-bl').attr('val',a)
+    })
+    $('.leftdoorval').on('keypress',function(){
+      var a = $(thist).val();
+      $(this).parents().find('.pz-cp-sz-bl').attr('val',a)
+    })
+
+    var counter = 2;
+
+    $(".pz-sz-an").click(function (e) {
+      e.preventDefault();
+      if(counter>3){
+        return false;
+      }   
+      var newTextBoxDiv = $(document.createElement('div'))
+      .attr("class", 'pz-cp-sz-door' + counter);
+      newTextBoxDiv.after().html('<div id="door'+counter+'" class="pz-cp-sz-bl "> <label for="">Left Side: <span>i</span> </label><div class="pz-cp-sz-ft"> <input type="number" step="0.5" min="0.5" max="70" class="left_feet size_measure_'+counter+'" name="door_'+counter+'_left_feet" id=""><span>ft.</span></div><div class="pz-cp-sz-ft"> <input type="number" step="1" min="0" max="12" class = "left_inch size_measure_'+counter+'" name="door_'+counter+'_left_inch" id=""><span>in.</span></div></div><div class="pz-cp-sz-bl"> <label for="">Right Side: <span>i</span> </label><div class="pz-cp-sz-ft"> <input type="number" step="0.5" min="0.5" max="70" name="door_'+counter+'_right_feet" class="right_feet size_measure_'+counter+'" id=""><span>ft.</span></div><div class="pz-cp-sz-ft"> <input type="number" step="1" min="0" max="12" name="door_'+counter+'_right_inch" class="right_inch size_measure_'+counter+'" id=""><span>in.</span></div></div><div class="pz-cp-sz-bl"> <label for="">Header: <span>i</span> </label><div class="pz-cp-sz-ft"> <input type="number" step="0.5" min="0.5" max="70" name="door_'+counter+'_header_feet" class="header_feet size_measure_'+counter+'" id=""><span>ft.</span></div><div class="pz-cp-sz-ft"> <input type="number" step="1" min="0" max="12" name="door_'+counter+'_header_inch" class="header_inch size_measure_'+counter+'" id=""><span>in.</span></div></div><div class="pz-cp-sz-bl"> <label for="">Stem wall: <span>i</span> </label><div class="pz-cp-sz-ft"> <input type="number" step="0.5" min="0.5" max="70" name="door_'+counter+'_stemwall_feet" class="stemwall_feet size_measure_'+counter+'" id=""><span>ft.</span></div><div class="pz-cp-sz-ft"> <input type="number" step="1" min="0" max="12" name="door_'+counter+'_stemwall_inch" class="stemwall_inch size_measure_'+counter+'" id=""><span>in.</span></div></div>');
+      newTextBoxDiv.appendTo(".pz-cp-sz-doors");
+      counter++;
+    });
+
+    $("#removeButton").click(function () {
+      if(counter==1){
+        return false;
+      }   
+
+      counter--;
+      $("#TextBoxDiv" + counter).remove();
+    });
+
+    $("#getButtonValue").click(function () {
+      var msg = '';
+      for(i=1; i<counter; i++){
+        msg += "\n Textbox #" + i + " : " + $('#textbox' + i).val();
+      }
+    });
+  });
+  //-------------------------------------------------------------//
+  // =============  New script =====================
+  //-------------------------------------------------------------//
+
+  var select_door_count =  $('.select-door-count')
+
+  $('.pz-door-measure-count').on("click", function(){
+    select_door_count.addClass('active')
+  })
+
+  select_door_count.children('li').on('click',function(){
+    selected_door_count = $(this).prevAll().length+1
+    $(".pz-door-list").find("button").removeClass("active");
+    $(".pz-door-list").find("button").prop('disabled', true);
+     $("#d"+selected_door_count+"-li").addClass('active');
+//     $(".pz-door-standard-size").addClass("hide");
+//     $("#d"+selected_door_count).removeClass("hide");
+    for (var i = 1; i <= selected_door_count; i++) {
+      $("#d"+i+"-li").prop('disabled', false);
+    }
+    $(this).siblings().removeClass('active')
+    $(this).addClass('active')
+    $(this).parent().removeClass('active')
+    $(this).parent().siblings('.pz-door-measure-count').find('.measure-count-selected').text(selected_door_count)
+  });
+  
+  
+	var doorWidth =  $('.door-width')
+
+  $('.pz-door-width').on("click", function(){
+    doorWidth.addClass('active');
+  })
+
+  doorWidth.children('li').on('click',function(){
+    $(".custom-size").closest(".pz-custom-radio").find(":radio").prop('checked', true);
+    var activeDoor = $("#doorList button.active").html();
+  doorOptions[activeDoor] = {};
+    selected_doorWidth = $(this).text().trim();
+    $(this).siblings().removeClass('active')
+    $(this).addClass('active')
+    $(this).parent().removeClass('active')
+    $(this).parent().siblings('.pz-door-width').text(selected_doorWidth);
+    doorOptions[activeDoor]["customSize"] = {"width": $(".pz-door-width").text().trim(), "height": $(".pz-door-height").text().trim() }
+    $("#pz-serving-value").val(JSON.stringify(doorOptions));
+  });
+  
+  var doorHeight = $('.door-height');
+
+  $('.pz-door-height').on("click", function(){
+    doorHeight.addClass('active');
+  })
+
+  doorHeight.children('li').on('click',function(){
+    $(".custom-size").closest(".pz-custom-radio").find(":radio").prop('checked', true);
+    var activeDoor = $("#doorList button.active").html();
+  doorOptions[activeDoor] = {};
+    selected_doorHeight = $(this).text().trim();
+    $(this).siblings().removeClass('active')
+    $(this).addClass('active')
+    $(this).parent().removeClass('active')
+    $(this).parent().siblings('.pz-door-height').text(selected_doorHeight);
+    doorOptions[activeDoor]["customSize"] = {"width": $(".pz-door-width").text().trim(), "height": $(".pz-door-height").text().trim() }
+    $("#pz-serving-value").val(JSON.stringify(doorOptions));
+  })
+
+</script>

@@ -1,0 +1,69 @@
+{{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js' | script_tag }}
+{% assign custom_options = product.metafields.custom_values %}
+{% if custom_options["product_customizer"] %}
+  {% assign custom_values  = custom_options['product_customizer'] %}
+    {% assign view = "productimize" %}
+    {% if custom_values == 1 %}
+    <a href="{{shop.url}}{{product.url }}?view={{view}}" class="engrave">
+    <div class="customize_options" style="display:block;">
+      <div class="selection-wrapper cart">
+        <div class="button-wrapper">
+          CUSTOMIZE THIS ITEM
+        </div>
+      </div>
+    </div>
+    </a>
+    {% else %}
+    <a href="{{shop.url}}{{product.url }}?view={{view}}" class="engrave">
+    <div class="customize_options" style="display:none;">
+      <div class="selection-wrapper cart">
+        <div class="button-wrapper">
+          CUSTOMIZE THIS ITEM
+        </div>
+      </div>
+    </div>
+    </a>
+    {% endif %}
+  {% comment %} <a href="{{shop.url}}{{product.url }}?view={{view}}" class="engrave">
+    <div class="customize_options" style="display:none;">
+      <div class="selection-wrapper cart">
+        <div class="button-wrapper">
+          CUSTOMIZE THIS ITEM
+        </div>
+      </div>
+    </div>
+    </a> {% endcomment %}
+  <style>
+    .customize_options {
+      padding-bottom: 30px;
+      padding-top: 5px;
+    }
+    .customize_options .selection-wrapper .button-wrapper {    
+      padding: 8px 0px;    
+      background: #7796a8;    
+      text-align: center;
+          color: #fff;
+    }
+   .customize_options .selection-wrapper .button-wrapper a, .purchase-box .selection-wrapper.cart .button-wrapper a {
+      font-size: 14px;
+    }
+    .purchase-box .selection-wrapper.cart .button-wrapper a:hover, .customize_options .selection-wrapper .button-wrapper a:hover {
+      color: #000000;
+    }
+  </style>
+<script>
+    $.post("https://devcloud.productimize.com/dcprocld/promize/getlinkproductsCID", {"web_prd_id": '{{product.id}}', "domainid": '{{custom_values[2]}}'})
+    .done(function(data){
+        console.log("data", data);
+    if(data[0]){
+        if(data[0]['status'] == 1){
+          $(".customize_options").css("display", "block");
+          custom_enable = "enabled";
+        }
+        else{
+         custom_enable = "disabled";
+        }
+      }
+    });
+</script>
+ {% endif %}
