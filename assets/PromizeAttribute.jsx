@@ -17,7 +17,8 @@ class PromizeAttribute extends React.Component {
         let pzCustomizer = this.props.pzCustomizer;
         let pzActiveCliparts = this.props.pzActiveCliparts;
         let pzClipartImg = this.props.pzClipartImg;
-        //let pzDefaultOptions = this.props.pzDefaultOptions;
+        let pzDefaultOptions = this.props.pzDefaultOptions;
+        let pzBaseType = this.props.pzBaseType;
         let pzDomainId = pzCustomizer.product.domain_id;
         pzTabAttributes.length > 0 && pzTabAttributes.map((pzAttribute, index) => {
             if (!pzCustomizer.attributes[pzTab.promize_tab_id]) {
@@ -36,7 +37,22 @@ class PromizeAttribute extends React.Component {
                                     pzCustomizer.attributeOptions[tabAttributeId] = {}
                                 }
                                 pzCustomizer.attributeOptions[tabAttributeId][attribute_value.promize_tab_attribute_values_id] = attribute_value;
-
+                                var window_url = new URL(window.location);
+                                var editid = window_url.searchParams.get("door_inputs");
+                                //console.log(attribute_value)
+                                if(editid)  {
+                                    let doorDetail = JSON.parse(editid);                                
+                                    if(attribute_value.promize_attribute_value && attribute_value.promize_attribute_value.option_description) {
+                                        let optionDesc = attribute_value.promize_attribute_value.option_description;
+                                        optionDesc = optionDesc.replace(/ /g,"").replace(/'/g,"");
+                                        let doorSize = doorDetail['Door 1'].replace(/ /g,"").replace(/'/g,"");
+                                        if(optionDesc == doorSize)  {
+                                            attribute_value.promize_tab_id = pzTab.promize_tab_id;
+                                            pzDefaultOptions.push(attribute_value)
+                                            pzBaseType[pzAttribute.promize_tab_attribute_id] = attribute_value.promize_attribute_value.option_value;
+                                        }
+                                    }
+                                }
                                 attribute_value.promize_sub_tabs.length > 0 && attribute_value.promize_sub_tabs.map((subTab, subTabIdx) => {
                                     if (pzCustomizer.attributeOptions[tabAttributeId][attribute_value.promize_tab_attribute_values_id]['promizeSubTabs'] == undefined) {
                                         pzCustomizer.attributeOptions[tabAttributeId][attribute_value.promize_tab_attribute_values_id]['promizeSubTabs'] = {}
@@ -49,7 +65,7 @@ class PromizeAttribute extends React.Component {
                                 })
                             })
 
-                            this.props.HomeComponent.setState({ pzCustomizer });
+                            this.props.HomeComponent.setState({ pzCustomizer,pzDefaultOptions });
                         })
                 }
                 else if (attributeType == "text") {

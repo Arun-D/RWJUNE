@@ -8,8 +8,10 @@ const PZSection = (props) => {
             {sorted_sections.map((pzSection, index) => {
                 //let pzSection = props.pzSections[pzSectionKey];
                 let pzSectionTabs = pzSection.promize_tabs;
+                let pzClass = (pzSection.promize_section_id == props.pzActiveSection) ? "pz-custom-tab-items active" : "pz-custom-tab-items";
+                pzClass = (pzSection.section_description) ? pzClass+" "+pzSection.section_description:pzClass;
                 return <li key={index}
-                    className={(pzSection.promize_section_id == props.pzActiveSection) ? "pz-custom-tab-items active" : "pz-custom-tab-items"}
+                    className={pzClass}
                     onClick={(e) => { e.preventDefault(), props.pzSection.pzActiveSectionHandler(pzSection.promize_section_id) }}>
                     <button className={(pzSection.promize_section_id == props.pzActiveSection) ? "pz-custom-tab-btn active" : "pz-custom-tab-btn"}>
                         {pzSection.section_icon && <img src={props.pzImgUrl + pzSection.section_icon.replace(props.pzReplaceImg, '')} />}

@@ -1,7 +1,26 @@
+let window_url = new URL(window.location);
+    var editDoorInput = window_url.searchParams.get("door_inputs");
+
+    // if(editDoorInput)  {
+    //     let doorDetail = JSON.parse(editDoorInput);                                
+    //     if(attribute_value.promize_attribute_value && attribute_value.promize_attribute_value.option_description) {
+    //         let optionDesc = attribute_value.promize_attribute_value.option_description;
+    //         optionDesc = optionDesc.replace(/ /g,"").replace(/'/g,"");
+    //         let doorSize = doorDetail['Door 1'].replace(/ /g,"").replace(/'/g,"");
+    //         if(optionDesc == doorSize)  {
+    //             attribute_value.promize_tab_id = pzTab.promize_tab_id;
+    //             // pzDefaultOptions.push(attribute_value)
+    //             // pzBaseType[pzAttribute.promize_tab_attribute_id] = attribute_value.promize_attribute_value.option_value;
+    //         }
+    //     }
+    // }
+
+
 class PromizeHome extends React.Component {
     constructor(props) {
         super(props);
     }
+    
     state = {
         pzCustomizer: {},
         pzCanvas: {},
@@ -41,11 +60,12 @@ class PromizeHome extends React.Component {
         generalSettings: {},
         pzBasePrice: (document.querySelector("meta[property='og:price:amount']")) ? parseFloat(document.querySelector("meta[property='og:price:amount']").getAttribute("content").replace(",", "")) : (document.querySelector("meta[property='product:price:amount']")) ? parseFloat(document.querySelector("meta[property='product:price:amount']").getAttribute("content").replace(",", "")) : 0,
         pzProductPrice: (document.querySelector("meta[property='og:price:amount']")) ? parseFloat(document.querySelector("meta[property='og:price:amount']").getAttribute("content").replace(",", "")) : (document.querySelector("meta[property='product:price:amount']")) ? parseFloat(document.querySelector("meta[property='product:price:amount']").getAttribute("content").replace(",", "")) : 0,
-        pzBaseType: '',
+        pzBaseType: {},
         pzPageLoader: true,
         pzCanvasLoader: false,
         pzQuantity: 1,
         pzPopup: false,
+        windowDetail:editDoorInput,
         pzDomainSettings: {
             1: 0, //zoom,
             2: 0, // full screen,
@@ -67,7 +87,7 @@ class PromizeHome extends React.Component {
     };
 
     componentWillMount() {
-        let { pzCustomizer, pzActiveSection, pzActiveTab, pzActiveOptions, pzActiveImages, pzActiveTexts, pzRules, pzEditId, pzProductPrice, pzQuantity, pzDomainSettings } = this.state;
+        let { pzCustomizer, pzActiveSection, pzActiveTab, pzActiveOptions, pzActiveImages, pzActiveTexts, pzRules, pzEditId, pzProductPrice, pzQuantity, pzDomainSettings,pzBaseType } = this.state;
         fetch(this.state.pzApiUrl + 'getProductDetailWithAttributes', {
             headers: {
                 'Accept': 'application/json',
@@ -243,8 +263,13 @@ class PromizeHome extends React.Component {
                         if (def_opt.promize_attribute_value.option_price) {
                             pzPrice = parseFloat(pzPrice) + parseFloat(def_opt.promize_attribute_value.option_price * pzQuantity);
                         }
+                        if(def_opt.promize_attribute_value.option_value)    {
+                        // console.log(def_opt)
+                            pzBaseType[def_opt.promize_tab_attribute_id] = def_opt.promize_attribute_value.option_value;
+                            console.log(pzBaseType)
+                        }
                     })
-                    this.setState({ pzDefaultOptions, pzPageLoader: false, pzProductPrice: pzPrice });
+                    this.setState({ pzDefaultOptions,pzBaseType, pzPageLoader: false, pzProductPrice: pzPrice });
                 })
         }
 
@@ -515,7 +540,7 @@ class PromizeHome extends React.Component {
 
     pzSetNextPage(){
         this.setState({StaticContent : false, nextPageData: true})
-        let { pzCustomizer, pzActiveSection, pzActiveTab, pzActiveOptions, pzActiveImages, pzActiveTexts, pzRules, pzEditId, pzProductPrice, pzQuantity, pzDomainSettings } = this.state;
+        let { pzCustomizer, pzActiveSection, pzActiveTab, pzActiveOptions, pzActiveImages, pzActiveTexts, pzRules, pzEditId, pzProductPrice, pzQuantity, pzDomainSettings,pzBaseType } = this.state;
         fetch(this.state.pzApiUrl + 'getProductDetailWithAttributes', {
             headers: {
                 'Accept': 'application/json',
@@ -690,8 +715,13 @@ class PromizeHome extends React.Component {
                         if (def_opt.promize_attribute_value.option_price) {
                             pzPrice = parseFloat(pzPrice) + parseFloat(def_opt.promize_attribute_value.option_price * pzQuantity);
                         }
+                        if(def_opt.promize_attribute_value.option_value)    {
+                        // console.log(def_opt)
+                            pzBaseType[def_opt.promize_tab_attribute_id] = def_opt.promize_attribute_value.option_value;
+                            console.log(pzBaseType)
+                        }
                     })
-                    this.setState({ pzDefaultOptions, pzPageLoader: false, pzProductPrice: pzPrice });
+                    this.setState({ pzDefaultOptions,pzBaseType, pzPageLoader: false, pzProductPrice: pzPrice });
                 })
         }
 
