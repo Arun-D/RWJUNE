@@ -14,7 +14,7 @@ class UploadTest extends React.Component {
     var formData = new FormData();
             formData.append("file", event.target.files[0]);
             formData.append("name", 'uploadimage');
-            fetch("https://live.productimize.com/promizenode/"+ "uploadImageWithRemoveWhite/" + parseInt('500') + '/' + parseInt('500'), {
+            fetch("https://live.productimize.com/promizenode/"+ "uploadImageWithRemoveWhite/" + parseInt('1000') + '/' + parseInt('500'), {
                 method: "POST",
                 body: formData
             })

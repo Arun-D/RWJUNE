@@ -152,7 +152,7 @@ var doorcount = Object.keys(myobject).length
     
     
       canvas = document.createElement('canvas')
-      canvas.width = 500
+      canvas.width = 1000
       canvas.height = 500
       document.getElementsByClassName('customupload-canvas')[0].appendChild(canvas)
       context = canvas.getContext('2d')
@@ -196,7 +196,7 @@ var doorcount = Object.keys(myobject).length
           images.push(image)
       }
       const animate = () => {
-          context.clearRect(0,0,500,500)
+          context.clearRect(0,0,100,500)
           backgroundImage = new Image();
           backgroundImage.src=uploadedhouseimage;
 let temp_height
