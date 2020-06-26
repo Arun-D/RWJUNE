@@ -150,8 +150,9 @@ var doorcount = Object.keys(myobject).length
   
   const init = async () => {
     
-    
-      canvas = document.createElement('canvas')
+    let childrens_for_canvas = document.getElementsByClassName('customupload-canvas')[0]
+    childrens_for_canvas.querySelectorAll('*').forEach(n => n.remove());
+    canvas = document.createElement('canvas')
       canvas.width = 1000
       canvas.height = 500
       document.getElementsByClassName('customupload-canvas')[0].appendChild(canvas)
