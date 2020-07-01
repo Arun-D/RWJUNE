@@ -284,6 +284,35 @@
 </script>
 
 <script>
+function redirect_door_product(){
+  debugger
+let doors = $("#pz-serving-value").val()
+door = JSON.parse(doors)
+let first_door = door["Door 1"]
+
+$.ajax({
+url: 'https://78f6bcc2c55c254471169a8985f2302e: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@rwgaragedoors.myshopify.com/admin/products/search.json?query=tag:'+first_door,
+type: 'GET',
+dataType: 'json',
+success: function(response){
+console.log("response", response);
+let product = response["products"][0]
+{% assign product = product %}
+console.log("{{shop.url}}/"+"products/"+product.handle)
+let redirect_product_url = "{{shop.url}}/"+"products/"+product.handle
+var url = new URL(redirect_product_url);
+    var search_params = url.searchParams;
+    search_params.set('view', 'productimize');
+    search_params.set('door_inputs', $("#pz-serving-value").val());
+    url.search = search_params.toString();
+    var  new_url = url.toString();
+    window.location.href = new_url;
+},
+error: function() {
+alert("product not created!")
+}
+})
+}
   var doorOptions = {};
   
   $(".pz-custom-radio").on("click", function(){
@@ -315,13 +344,14 @@
   })
   
   $(".pz-measure-design-now").on("click", function(){
-    var url = new URL(window.location.href);
+    redirect_door_product()
+    /*var url = new URL(window.location.href);
     var search_params = url.searchParams;
     search_params.set('view', 'productimize');
     search_params.set('door_inputs', $("#pz-serving-value").val());
     url.search = search_params.toString();
     var  new_url = url.toString();
-    window.location.href = new_url;
+    window.location.href = new_url;*/
   })
   
   $('.close-cp').click(function(){
