@@ -930,6 +930,65 @@ class PromizeHome extends React.Component {
 
     }
 
+    addAllItems = (array) => {
+        Shopify.queue = [];
+          var quantity = 1 ;
+          var newArray = array;
+          for (var i = 0; i < newArray.length; i++) {
+            product = newArray[i]
+            Shopify.queue.push({
+              variantId: product,
+            });
+              }
+          Shopify.moveAlong = function() {
+          // If we still have requests in the queue, let's process the next one.
+          if (Shopify.queue.length) {
+            var request = Shopify.queue.shift();
+          aa = '{"color":"red","size": "medium"}'
+         test = JSON.parse(a)
+          data1  = Object.entries(test).map(([key, value]) => data[key] = value)
+    
+    
+          $.ajax({
+            url: "/cart/add.js",
+            type: "POST",
+            dataType: "json",
+            data: { quantity: qty, id: variantid, properties: (pzSelectedObjects) },
+            success: function (res) {
+                fetch(pzAPIURL + 'saveCartProperty', {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    method: "POST",
+                    body: JSON.stringify({ cart_item_id: res.id, domain_id: pzCustomizer.product.domain_id, custom_properties: pzImageData })
+                })
+                    .then(res => res.json())
+                    .then(response => {
+                        console.log("===response===", response)
+                        Shopify.moveAlong();
+                        quantity += 1;
+                    });
+                window.location.href = "/cart";
+            },
+            error: function () {
+                alert("Sorry something went wrong..");
+                if (Shopify.queue.length){
+                    Shopify.moveAlong()
+                  }
+            },
+            complete: function () {
+                pzSetState('pzPageLoader', false);
+            }
+        })
+    
+            
+            }
+         
+           };
+        Shopify.moveAlong();
+      };
+
     pzAddToCart = () => {
         this.setState({ 'pzPageLoader': true });
         let data = {};
@@ -960,34 +1019,38 @@ class PromizeHome extends React.Component {
                 })
                 pzSelectedObjects = { ...pzSelectedObjects, ...installationVal}
                 delete pzSelectedObjects.price
-                $.ajax({
-                    url: "/cart/add.js",
-                    type: "POST",
-                    dataType: "json",
-                    data: { quantity: qty, id: variantid, properties: (pzSelectedObjects) },
-                    success: function (res) {
-                        fetch(pzAPIURL + 'saveCartProperty', {
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'application/json'
-                            },
-                            method: "POST",
-                            body: JSON.stringify({ cart_item_id: res.id, domain_id: pzCustomizer.product.domain_id, custom_properties: pzImageData })
+                // $.ajax({
+                //     url: "/cart/add.js",
+                //     type: "POST",
+                //     dataType: "json",
+                //     data: { quantity: qty, id: variantid, properties: (pzSelectedObjects) },
+                //     success: function (res) {
+                //         fetch(pzAPIURL + 'saveCartProperty', {
+                //             headers: {
+                //                 'Accept': 'application/json',
+                //                 'Content-Type': 'application/json'
+                //             },
+                //             method: "POST",
+                //             body: JSON.stringify({ cart_item_id: res.id, domain_id: pzCustomizer.product.domain_id, custom_properties: pzImageData })
+                //         })
+                //             .then(res => res.json())
+                //             .then(response => {
+                //                 console.log("===response===", response)
+                //             });
+                //         window.location.href = "/cart";
+                //     },
+                //     error: function () {
+                //         alert("Sorry something went wrong..");
+                //     },
+                //     complete: function () {
+                //         pzSetState('pzPageLoader', false);
+                //     }
+                // })
+                // neew code
+              let  a=[5327238496416,5318684442784]
+                addAllItems(a)
                         })
-                            .then(res => res.json())
-                            .then(response => {
-                                console.log("===response===", response)
-                            });
-                        window.location.href = "/cart";
-                    },
-                    error: function () {
-                        alert("Sorry something went wrong..");
-                    },
-                    complete: function () {
-                        pzSetState('pzPageLoader', false);
-                    }
-                })
-            })
+                        //newcode end
         } else {
             pzSetState('pzPageLoader', false);
             alert("No item is selected. Please select some items before hit add to cart")
@@ -1004,3 +1067,8 @@ class PromizeHome extends React.Component {
 }
 
 ReactDOM.render(<PromizeHome />, document.getElementById('root'));
+
+
+ 
+
+  
