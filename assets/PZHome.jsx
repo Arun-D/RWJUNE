@@ -48,12 +48,10 @@ const PZHome = (props) => {
                     <div className={(props.fullScreen == true) ? "pz-customizer-section pz-custom-hide" : "pz-customizer-section"}>
                         <div className="pz-customizer-wrapper">
                             <div className="pz-custom-item-wrapper">
-                                <div className="pz-custom-item-menu">
+                                <div className="pz-custom-item-menu hide">
                                     {Object.keys(props.pzCustomizer).length > 0 && <PromizeSection {...props} />}
                                 </div>
-                                <div className="pz-custom-content-wrapper">
-                                    {Object.keys(props.pzCustomizer).length > 0 && <PromizeTab {...props} />}
-                                </div>
+                                {Object.keys(props.pzCustomizer).length > 0 && <PromizeTab {...props} />}
                             </div>
                         </div>
                     </div>

@@ -18,7 +18,6 @@ class PromizeAttribute extends React.Component {
         let pzActiveCliparts = this.props.pzActiveCliparts;
         let pzClipartImg = this.props.pzClipartImg;
         let pzDefaultOptions = this.props.pzDefaultOptions;
-        let pzBaseType = this.props.pzBaseType;
         let pzDomainId = pzCustomizer.product.domain_id;
         pzTabAttributes.length > 0 && pzTabAttributes.map((pzAttribute, index) => {
             if (!pzCustomizer.attributes[pzTab.promize_tab_id]) {
@@ -49,7 +48,6 @@ class PromizeAttribute extends React.Component {
                                         if(optionDesc == doorSize)  {
                                             attribute_value.promize_tab_id = pzTab.promize_tab_id;
                                             pzDefaultOptions.push(attribute_value)
-                                            pzBaseType[pzAttribute.promize_tab_attribute_id] = attribute_value.promize_attribute_value.option_value;
                                         }
                                     }
                                 }

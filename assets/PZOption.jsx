@@ -5,10 +5,6 @@ const PZOption = (props) => {
   const pzTabData = props.pzSubTab ? props.pzSubTab : props.pzTab
   const pzTabStyle = (pzTabData.tab_style) ? JSON.parse(pzTabData.tab_style) : '';
   const displayType = (pzDisplayStyle[pzTabStyle.display]) ? pzDisplayStyle[pzTabStyle.display] : 'square';
-
-  var result = [];
-  for(var i in props.pzBaseType)
-    result.push( props.pzBaseType[i]);
   return (
     <React.Fragment>
       {
@@ -18,43 +14,8 @@ const PZOption = (props) => {
           <ul className={(displayType != "select") ? "pz-design-item-list" : ("pz-custom-dd-list " + props.pzShowOption)}>
             {Object.keys(pzOptions).map((tabOption, option_index) => {
               const pzTabOption = pzOptions[tabOption];
-              //console.log('test',pzTabOption.promize_tab_attribute_id)
               const pzOptionValue = pzTabOption.promize_attribute_value;
-
-              let filterFound = 0, showoption = 0;
-               filterFound = pzOptionValue.option_code && result.filter((val)=>{
-                return pzOptionValue.option_code.includes(val)
-              })              
-              // if(filterFound) {
-              //   if(result.length == filterFound.length) {
-              //     showoption = 1;
-              //   }
-              // }
-
-              let optionCdCount = 0;
-              
-              if(pzOptionValue.option_code) {
-                let optionCodeCount = pzOptionValue.option_code.split('_').length - 1;
-                for(var i in props.pzBaseType)  {                  
-                  
-                  if(i == pzTabOption.promize_tab_attribute_id) {
-                  //return false;                  
-                  } else if(pzOptionValue.option_code && pzOptionValue.option_code.includes(props.pzBaseType[i])) {
-                    optionCdCount++;
-                  // showoption = 1;
-                  }
-                }
-                //if()  {
-                  
-                //}
-                if(optionCdCount == optionCodeCount)  {
-                  showoption = 1;
-                }
-                //console.log(pzOptionValue.option_code, optionCodeCount, '---', optionCdCount, '----->', showoption)
-              }
-
-              if (props.pzHideAttributeValues.includes(pzTabOption.promize_tab_attribute_values_id) || (props.pzBaseType && pzOptionValue.option_code && !showoption)) {
-                //console.log('aaaaa',pzOptionValue.option_code, '----->', showoption)
+              if (props.pzHideAttributeValues.includes(pzTabOption.promize_tab_attribute_values_id) || (props.pzBaseType && pzOptionValue.option_code && !pzOptionValue.option_code.includes(props.pzBaseType))) {
                 return ''
               }
               if (pzTabOption && Object.keys(pzTabOption).length > 0) {
