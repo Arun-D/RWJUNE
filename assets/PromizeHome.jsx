@@ -913,7 +913,7 @@ class PromizeHome extends React.Component {
 
     }
 
-    addAllItems = (array) => {
+    addAllItems = async (array) => {
         Shopify.queue = [];
           var quantity = 1 ;
           var newArray = array;
@@ -931,7 +931,7 @@ class PromizeHome extends React.Component {
          test = JSON.parse(a)
           data1  = Object.entries(test).map(([key, value]) => data[key] = value)
     
-    
+     
           $.ajax({
             url: "/cart/add.js",
             type: "POST",
@@ -973,6 +973,7 @@ class PromizeHome extends React.Component {
       };
 
     pzAddToCart = () => {
+        let addAllItems
         this.setState({ 'pzPageLoader': true });
         let data = {};
         let variantid = document.getElementById("variant_id") ? document.getElementById("variant_id").value : '';
@@ -1030,9 +1031,69 @@ class PromizeHome extends React.Component {
                 //     }
                 // })
                 // neew code
-              let  a=[5327238496416,5318684442784]
-                addAllItems(a)
+              let  a=[34808624316576,34808943640736]
+              addAllItems =  (array) => {
+                  debugger
+                  let product
+                Shopify.queue = [];
+                  var quantity = 1 ;
+                  var newArray = array;
+                  for (var i = 0; i < newArray.length; i++) {
+                    product = newArray[i]
+                    Shopify.queue.push({
+                      variantId: product,
+                    });
+                      }
+                  Shopify.moveAlong = function() {
+                  // If we still have requests in the queue, let's process the next one.
+                  if (Shopify.queue.length) {
+                    var request = Shopify.queue.shift();
+            //     let  aa = '{"color":"red","size": "medium"}'
+            //     let test = JSON.parse(a)
+            //    let   data1  = Object.entries(test).map(([key, value]) => data[key] = value)
+            
+             
+                  $.ajax({
+                    url: "/cart/add.js",
+                    type: "POST",
+                    dataType: "json",
+                    data: { quantity: qty, id: request.variantId, properties: (pzSelectedObjects) },
+                    success: function (res) {
+                        fetch(pzAPIURL + 'saveCartProperty', {
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json'
+                            },
+                            method: "POST",
+                            body: JSON.stringify({ cart_item_id: res.id, domain_id: pzCustomizer.product.domain_id, custom_properties: pzImageData })
                         })
+                            .then(res => res.json())
+                            .then(response => {
+                                console.log("===response===", response)
+                                Shopify.moveAlong();
+                                quantity += 1;
+                            });
+                        window.location.href = "/cart";
+                    },
+                    error: function () {
+                        alert("Sorry something went wrong..");
+                        if (Shopify.queue.length){
+                            Shopify.moveAlong()
+                          }
+                    },
+                    complete: function () {
+                        pzSetState('pzPageLoader', false);
+                    }
+                })
+            
+                    
+                    }
+                 
+                   };
+                Shopify.moveAlong();
+              };
+              addAllItems(a)
+                                })
                         //newcode end
         } else {
             pzSetState('pzPageLoader', false);

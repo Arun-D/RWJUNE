@@ -197,7 +197,7 @@ var doorcount = Object.keys(myobject).length
           images.push(image)
       }
       const animate = () => {
-          context.clearRect(0,0,100,500)
+          context.clearRect(0,0,1000,500)
           backgroundImage = new Image();
           backgroundImage.src=uploadedhouseimage;
 let temp_height
