@@ -296,14 +296,21 @@ type: 'GET',
 dataType: 'json',
 success: function(response){
 console.log("response", response);
+debugger;
 let product = response["products"][0]
 {% assign product = product %}
 console.log("{{shop.url}}/"+"products/"+product.handle)
 let redirect_product_url = "{{shop.url}}/"+"products/"+product.handle
+let counter_for_door = $("#pz-serving-value").val()
+let counter_for_door_json = JSON.parse(counter_for_door)
+let unique_door_values = Object.values(counter_for_door_json)
+let unique_door_count = {}
+unique_door_values.forEach(function(i) { unique_door_count[i] = (unique_door_count[i]||0) + 1;});
 var url = new URL(redirect_product_url);
     var search_params = url.searchParams;
     search_params.set('view', 'productimize');
     search_params.set('door_inputs', $("#pz-serving-value").val());
+    search_params.set('unique_door_count',JSON.stringify(unique_door_count));
     url.search = search_params.toString();
     var  new_url = url.toString();
     window.location.href = new_url;
