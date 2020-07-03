@@ -101,7 +101,13 @@ class PromizeHome extends React.Component {
                 pzSections.length > 0 && pzSections.map((section, sect_index) => {
                     pzActiveSection = (sect_index == 0) ? section.promize_section_id : pzActiveSection;
                     pzCustomizer.sections[section.promize_section_id] = section;
-                    var promizeTabs = section.promize_tabs
+                    var promizeTabs = section.promize_tabs.filter((val)=>{
+                        
+                        if(val.tab_description != "nextstep"){
+                            return val;
+                            }
+                        console.log(val,"testing tab")
+                    })
                     promizeTabs.length > 0 && promizeTabs.map((tab, tab_idex) => {
                         if (tab.is_default_tab || tab_idex == 0) {
                             pzActiveTab[section.promize_section_id] = tab.promize_tab_id;
@@ -549,7 +555,7 @@ class PromizeHome extends React.Component {
                 var pzSectionsDefault = pzCustomizer.product.promize_sections;
                 
                 var pzSections =  pzSectionsDefault.length >0 && pzSectionsDefault.filter((val)=>{
-                    if(val.section_description == "nextstep"){
+                    if(val.section_description != "nextstep"){
                         return val;
                     }
                 })
@@ -558,8 +564,14 @@ class PromizeHome extends React.Component {
                 pzSections.length > 0 && pzSections.map((section, sect_index) => {
                     pzActiveSection = (sect_index == 0) ? section.promize_section_id : pzActiveSection;
                     pzCustomizer.sections[section.promize_section_id] = section;
-                    var promizeTabs = section.promize_tabs
-                    promizeTabs.length > 0 && promizeTabs.map((tab, tab_idex) => {
+                    var promizeTabs = section.promize_tabs.filter((val)=>{
+                        
+                        if(val.tab_description == "nextstep"){
+                            return val;
+                            }
+                        console.log(val,"testing tab")
+                    })
+                        promizeTabs.length > 0 && promizeTabs.map((tab, tab_idex) => {
                         if (tab.is_default_tab || tab_idex == 0) {
                             pzActiveTab[section.promize_section_id] = tab.promize_tab_id;
                         } else if (pzActiveTab[section.promize_section_id] == undefined) {
