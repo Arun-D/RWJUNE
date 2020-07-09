@@ -699,7 +699,7 @@ const pzCreateCanvasObject = (view_id, pzObjType, pzObjectParams, pzCanvas, pzCu
         const parsedPosition = (pzObjectParams.option_position) ? JSON.parse(pzObjectParams.option_position) : '';
         const {
             left = 0, top = 0, width = 0, height = 0, scaleX = 1, scaleY = 1, angle = 0
-        } = (parsedPosition && view_id in parsedPosition) ? parsedPosition[view_id]: '';
+        } = (parsedPosition && view_id in parsedPosition) ? parsedPosition[view_id] : '';
         let objName = "FObject_option_" + pzObjectParams.promize_tab_id
         let canvasObj = pzCanvas.getItemByName(objName)
         return {
@@ -728,7 +728,8 @@ const pzCreateCanvasObject = (view_id, pzObjType, pzObjectParams, pzCanvas, pzCu
             "option_name": pzObjectParams.promize_attribute_value ? pzObjectParams.promize_attribute_value.option_name : '',
             "option_price": pzObjectParams.promize_attribute_value ? pzObjectParams.promize_attribute_value.option_price : '',
             "tab_name": pzObjectParams.tab_name,
-            "option_sku": pzObjectParams.promize_attribute_value ? pzObjectParams.promize_attribute_value.option_sku : ''
+            "option_sku": pzObjectParams.promize_attribute_value ? pzObjectParams.promize_attribute_value.option_sku : '',
+
         };
     }
 }
@@ -994,7 +995,7 @@ const pzGetSelectedValuesForCart = (pzCanvasObject, pzBasePrice, pzProductPrice,
             'textinfo': {},
             'objectinfo': {},
             'baseinfo': {},
-            'Productinfo':{'name':pzCustomizer.product.promize_customizer_name}
+            'Productinfo': { 'name': pzCustomizer.product.promize_customizer_name }
         }
         const uploadedImages = [];
         let uploadImageCount = 0;

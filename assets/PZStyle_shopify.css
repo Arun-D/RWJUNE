@@ -712,7 +712,7 @@ opacity: 0.3;
 }
 
 .pz-design-item .pz-design-item-img {
-  background-position: center !important;
+  background-position: top !important;
   background-size: cover !important;
   background-repeat: no-repeat !important;
   transition: all .5s;
