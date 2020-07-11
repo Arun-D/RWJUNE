@@ -3,11 +3,11 @@ class PromizeOption extends React.Component {
         super(props);
     }
     state = {
-        pzActiveDropdown : ''
+        pzActiveDropdown: ''
     }
 
-    pzDeleteObject=(tabId,pzActiveOptions,pzCanvasObject)=>{
-        let {  pzCustomizer,pzCanvas,pzCurrentView } = this.props;
+    pzDeleteObject = (tabId, pzActiveOptions, pzCanvasObject) => {
+        let { pzCustomizer, pzCanvas, pzCurrentView } = this.props;
         let subTabs = pzCustomizer.subtabs[tabId] ? pzCustomizer.subtabs[tabId] : {};
         if (Object.keys(subTabs).length > 0 && Object.keys(pzActiveOptions).length > 0) {
             Object.keys(pzActiveOptions).map((option) => {
@@ -19,10 +19,10 @@ class PromizeOption extends React.Component {
                     delete pzCanvasObject[pzCurrentView][canvasObj.name]
                     delete pzActiveOptions[option]
                 }
-                if(activeObj && activeObj.child_tab_id)  {
+                if (activeObj && activeObj.child_tab_id) {
                     console.log(activeObj.child_tab_id)
-                    this.pzDeleteObject(activeObj.child_tab_id,pzActiveOptions,pzCanvasObject)
-                }   else {
+                    this.pzDeleteObject(activeObj.child_tab_id, pzActiveOptions, pzCanvasObject)
+                } else {
                     let pzActOpt = [];
                     pzActOpt[0] = pzActiveOptions;
                     pzActOpt[1] = pzCanvasObject;
@@ -55,16 +55,16 @@ class PromizeOption extends React.Component {
         if (oldPrice) {
             if (pzOptionAttrValue.option_price) {
                 pzPrice = parseFloat(pzPrice) - parseFloat(oldPrice * pzQuantity);
-                pzPrice = parseFloat(pzPrice) + parseFloat(pzOptionAttrValue.option_price *pzQuantity);
+                pzPrice = parseFloat(pzPrice) + parseFloat(pzOptionAttrValue.option_price * pzQuantity);
             } else {
                 pzPrice = parseFloat(pzPrice) - parseFloat(oldPrice * pzQuantity);
             }
         } else if (pzOptionAttrValue && pzOptionAttrValue.option_price) {
             pzPrice = parseFloat(pzPrice) + parseFloat(pzOptionAttrValue.option_price * pzQuantity);
         }
-        let pzStateOption = this.pzDeleteObject(tabId, pzActiveOptions,pzCanvasObject);
-        pzActiveOptions = (pzStateOption && pzStateOption[0]) ? pzStateOption[0] :pzActiveOptions;
-        pzCanvasObject = (pzStateOption && pzStateOption[1]) ? pzStateOption[1] :pzCanvasObject; 
+        let pzStateOption = this.pzDeleteObject(tabId, pzActiveOptions, pzCanvasObject);
+        pzActiveOptions = (pzStateOption && pzStateOption[0]) ? pzStateOption[0] : pzActiveOptions;
+        pzCanvasObject = (pzStateOption && pzStateOption[1]) ? pzStateOption[1] : pzCanvasObject;
         pzActiveOptions[tabId][0] = tabAttrId;
         pzActiveOptions[tabId][1] = attrValueId;
         pzActiveOptions[tabId][2] = pzOptionAttrValue.option_code;
@@ -95,7 +95,7 @@ class PromizeOption extends React.Component {
             this.props.HomeComponent.setState({ pzApplyOptions: [] })
         }
     }
-    componentDidUpdate(){
+    componentDidUpdate() {
         let { pzDefaultOptions, pzOptions, pzActiveOptions, pzApplyOptions, pzCustomizer } = this.props;
         if (pzDefaultOptions.length > 0 && Object.keys(pzActiveOptions).length == 0) {
             const pzOptionArray = Array.from(Object.keys(pzOptions), k => pzOptions[k]);
@@ -132,9 +132,9 @@ class PromizeOption extends React.Component {
             this.pzChangeHandler(undefined, option)
         })
     }
-    pzSelectHandler = (e, value) =>{
+    pzSelectHandler = (e, value) => {
         e.preventDefault();
-        this.setState({pzActiveDropdown : value})
+        this.setState({ pzActiveDropdown: value })
     }
 
     pzChangeHandler = (params, pzOptionProperty) => {
@@ -152,9 +152,10 @@ class PromizeOption extends React.Component {
                 })
             }
             let pzOptionAttrValue = pzOptionProperty.promize_attribute_value;
-            if(nextPageData){
-                InstallationData[tabData.tab_name] = [pzOptionAttrValue.option_name, pzOptionAttrValue.option_price];            }
-            
+            if (nextPageData) {
+                InstallationData[tabData.tab_name] = [pzOptionAttrValue.option_name, pzOptionAttrValue.option_price];
+            }
+
             let additionalData = pzOptionProperty.additional_data ? JSON.parse(pzOptionProperty.additional_data) : {}
             if (Object.keys(additionalData).length > 0 && additionalData.replaceModel && params != undefined) {
                 let replaceOptions = [];
@@ -169,10 +170,10 @@ class PromizeOption extends React.Component {
                             delete pzActiveOptions[canvasObj.tabAttrId]
                         }
                         let attributeVal = pzCustomizer.attributes[option]
-                        Object.values(attributeVal).map((attr)=>{
+                        Object.values(attributeVal).map((attr) => {
                             let attributeOptions = pzCustomizer.attributeOptions[attr.promize_tab_attribute_id]
                             let optionToApply = Object.keys(attributeOptions).find(key => attributeOptions[key].promize_attribute_value.option_code === optCodeToReplace)
-                            if(optionToApply){
+                            if (optionToApply) {
                                 let optionObj = {
                                     ...attributeOptions[optionToApply],
                                     ...pzCustomizer.tabs[option]
@@ -180,12 +181,12 @@ class PromizeOption extends React.Component {
                                 optionToApply && replaceOptions.push(optionObj)
                             }
                         })
-            //             let optionToApply = Object.keys(tabOptions).find(key => tabOptions[key].promize_attribute_value.option_code === optCodeToReplace);
-            //             let optionObj = {
-            //                 ...tabOptions[optionToApply],
-            //                 ...pzCustomizer.tabs[option]
-            //             }
-            //             optionToApply && replaceOptions.push(optionObj)
+                        //             let optionToApply = Object.keys(tabOptions).find(key => tabOptions[key].promize_attribute_value.option_code === optCodeToReplace);
+                        //             let optionObj = {
+                        //                 ...tabOptions[optionToApply],
+                        //                 ...pzCustomizer.tabs[option]
+                        //             }
+                        //             optionToApply && replaceOptions.push(optionObj)
                     } else if (pzOptionProperty.promize_tab_id != option && tabOptions) {
                         let optionToApply = Object.keys(tabOptions).find(key => tabOptions[key].promize_tab_attribute_values_id === parseInt(pzActiveOptions[option][1]));
                         let optionObj = {
@@ -200,14 +201,14 @@ class PromizeOption extends React.Component {
                         this.pzHandleReplaceOptions(replaceOptions)
                     }
                 });
-            }else if(Object.keys(additionalData).length > 0 && additionalData.applyColorTo && additionalData.applyColorFrom && parseInt(additionalData.applyColorFrom) === parseInt(pzOptionProperty.promize_tab_attribute_id)){
-                let tab_id =  additionalData.applyColorTo
+            } else if (Object.keys(additionalData).length > 0 && additionalData.applyColorTo && additionalData.applyColorFrom && parseInt(additionalData.applyColorFrom) === parseInt(pzOptionProperty.promize_tab_attribute_id)) {
+                let tab_id = additionalData.applyColorTo
                 var canvasObject = pzCanvas.getItemByName("FObject_option_" + tab_id);
-                if(canvasObject){
-                    this.props.HomeComponent.setState({pzCanvasLoader : true})
+                if (canvasObject) {
+                    this.props.HomeComponent.setState({ pzCanvasLoader: true })
                     let OptionColorCode = (pzOptionAttrValue.option_value && pzOptionAttrValue.option_value.charAt(0) == '#' && pzCheckValidColorCode(pzOptionAttrValue.option_value)) ? pzOptionAttrValue.option_value
-                : (pzCheckValidColorCode('#' + pzOptionAttrValue.option_value))
-                    ? ('#' + pzOptionAttrValue.option_value) : '';
+                        : (pzCheckValidColorCode('#' + pzOptionAttrValue.option_value))
+                            ? ('#' + pzOptionAttrValue.option_value) : '';
                     canvasObject.filterColor = OptionColorCode
                     pzApplyColorToObject(pzCanvas, canvasObject, pzCrossOrigin, this.props.HomeComponent)
                     this.pzSetActiveOptionHandler(pzOptionProperty.promize_tab_id, pzOptionProperty.promize_tab_attribute_id, pzOptionProperty.promize_tab_attribute_values_id, pzOptionAttrValue);
@@ -248,7 +249,7 @@ class PromizeOption extends React.Component {
                     pzOptionProperty['src'] = loadOptionImage;
                     pzObject = pzCreateCanvasObject(objectViewId, ObjectType, pzOptionProperty, pzCanvas, pzCurrentView, pzCrossOrigin, this.props.HomeComponent)
                     if (objectViewId == pzCurrentView && pzOptionProperty['src']) {
-                        this.props.HomeComponent.setState({pzCanvasLoader : true})
+                        this.props.HomeComponent.setState({ pzCanvasLoader: true })
                         pzAddObjectToCanvas(pzCanvas, pzObject, pzCrossOrigin, this.props.HomeComponent)
                     }
                     (ObjectType == 'image' || ObjectType == 'color') ? (pzOptionProperty['src'] ? pzCanvasObject[objectViewId][pzObject.name] = pzObject : '') : pzCanvasObject[objectViewId][pzObject.name] = pzObject;

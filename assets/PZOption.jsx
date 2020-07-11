@@ -3,6 +3,11 @@ const PZOption = (props) => {
   const pzDisplayStyle = { 1: 'square', 2: 'circle', 3: 'radio', 4: 'checkbox', 5: 'select', 6: 'input' };
   const pzOptions = props.pzOptions;
   const pzTabData = props.pzSubTab ? props.pzSubTab : props.pzTab
+  if ((props.nextPageData && pzTabData.tab_description != "nextstep")
+  ) {
+    return false;
+
+  }
   const pzTabStyle = (pzTabData.tab_style) ? JSON.parse(pzTabData.tab_style) : '';
   const displayType = (pzDisplayStyle[pzTabStyle.display]) ? pzDisplayStyle[pzTabStyle.display] : 'square';
   return (
@@ -73,7 +78,7 @@ const PZOption = (props) => {
             })
             }
           </ul>
-          {(displayType == "select") ? <button className ="pz-custom-dd" onClick={(e) => { e.preventDefault(), props.OptionComponent.pzShowOption() }}><span>{activeOpt}</span><i className ="fa fa-caret-down"></i></button> : ''}
+          {(displayType == "select") ? <button className="pz-custom-dd" onClick={(e) => { e.preventDefault(), props.OptionComponent.pzShowOption() }}><span>{activeOpt}</span><i className="fa fa-caret-down"></i></button> : ''}
         </div>
       }
     </React.Fragment>

@@ -100,25 +100,30 @@ class PromizeHome extends React.Component {
                     return false
                 }
                 pzCustomizer.product = response.product.promize_customizer;
-                var pzSectionsDefault = pzCustomizer.product.promize_sections;
+                ///var pzSectionsDefault = pzCustomizer.product.promize_sections;
 
-                var pzSections = pzSectionsDefault.length > 0 && pzSectionsDefault.filter((val) => {
+                /* var pzSections = pzSectionsDefault.length > 0 && pzSectionsDefault.filter((val) => {
                     if (val.section_description != "nextstep") {
                         return val;
                     }
-                })
-                // var pzSections = pzCustomizer.product.promize_sections;
+                }) */
+                var pzSections = pzCustomizer.product.promize_sections;
                 pzCustomizer.sections = {}
                 pzCustomizer.tabs = {}
                 pzSections.length > 0 && pzSections.map((section, sect_index) => {
                     pzActiveSection = (sect_index == 0) ? section.promize_section_id : pzActiveSection;
                     pzCustomizer.sections[section.promize_section_id] = section;
-                    var promizeTabs = section.promize_tabs.filter((val) => {
+                    /* var promizeTabs = section.promize_tabs.filter((val) => {
 
                         if (val.tab_description != "nextstep") {
                             return val;
                         }
                         console.log(val, "testing tab")
+                    }) */
+
+                    let promizeTabs = []
+                    promizeTabs = section.promize_tabs.length > 0 && section.promize_tabs.sort(function (a, b) {
+                        return a.sort_id - b.sort_id;
                     })
                     promizeTabs.length > 0 && promizeTabs.map((tab, tab_idex) => {
                         if (tab.is_default_tab || tab_idex == 0) {
@@ -728,8 +733,13 @@ class PromizeHome extends React.Component {
         })
         this.setState({ pzHideTabs, pzHideAttributes, pzHideAttributeValues, pzApplyOptions, pzActiveOptions, pzCanvas, pzCanvasObject })
     }
-
     pzSetNextPage() {
+        this.setState({ StaticContent: false, nextPageData: true }, () => {
+            this.calculatePriceForOtherProducts();
+        })
+    }
+
+    pzSetNextPageOLD() {
         console.log("calling pzSEtNExtPAge")
 
         this.setState({ StaticContent: false, nextPageData: true })
@@ -1185,8 +1195,6 @@ class PromizeHome extends React.Component {
     };
 
     pzAddToCart = () => {
-        let aa =[]
-        let a =[]
         let addAllItems
         this.setState({ 'pzPageLoader': true });
         let data = {};
@@ -1222,10 +1230,6 @@ class PromizeHome extends React.Component {
                 pzSelectedObjects = { ...pzSelectedObjects, ...pzOtherProducts }
                 console.log("pzSelectedObjects  ==> ", pzSelectedObjects)
 
-                debugger
-aa.push(pzSelectedObjects.price)
-aa.push(pzSelectedObjects[5327238496416].price)
-delete pzSelectedObjects[5327238496416]
 
                 delete pzSelectedObjects.price
 
@@ -1257,36 +1261,7 @@ delete pzSelectedObjects[5327238496416]
                 //     }
                 // })
                 // neew code
-                var varient_id = []
-                 varient_id = [34808624316576, 34808943640736]
-
-                function priceCheck(aa){
-                    for(i=0;i<aa.length;i++){
-                    debugger; 
-                    $.ajax({
-                                    url: 'https://78f6bcc2c55c254471169a8985f2302e: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@rwgaragedoors.myshopify.com/admin/products/search.json?query=price:'+aa[i],
-                                    type: 'GET',
-                                    dataType: 'json',
-                                    success: function(response){
-                                    console.log("response", response);
-                                      let x = Object.values(response["products"][0]["variants"])
-                                      x.forEach(function(x){console.log(x);
-                                       if(x.price == aa[i]){
-                                           varient_id.push(x.id)
-                                           }
-                                           })
-                                           addAllItems(varient_id)
-                                    },
-                                    error: function() {
-                                        alert("product not created!")
-                                        }
-                                })
-                            }
-                
-                  }
- 
-                  priceCheck(aa)
-
+                let a = [34808624316576, 34808943640736]
                 addAllItems = (array) => {
                     debugger
                     let product
@@ -1306,8 +1281,6 @@ delete pzSelectedObjects[5327238496416]
                             //     let  aa = '{"color":"red","size": "medium"}'
                             //     let test = JSON.parse(a)
                             //    let   data1  = Object.entries(test).map(([key, value]) => data[key] = value)
-
-                            
 
 
                             $.ajax({
@@ -1349,7 +1322,7 @@ delete pzSelectedObjects[5327238496416]
                     };
                     Shopify.moveAlong();
                 };
-                addAllItems(varient_id)
+                addAllItems(a)
             })
             //newcode end
         } else {
