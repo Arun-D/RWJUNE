@@ -1185,6 +1185,8 @@ class PromizeHome extends React.Component {
     };
 
     pzAddToCart = () => {
+        let aa =[]
+        let a =[]
         let addAllItems
         this.setState({ 'pzPageLoader': true });
         let data = {};
@@ -1220,6 +1222,10 @@ class PromizeHome extends React.Component {
                 pzSelectedObjects = { ...pzSelectedObjects, ...pzOtherProducts }
                 console.log("pzSelectedObjects  ==> ", pzSelectedObjects)
 
+                debugger
+aa.push(pzSelectedObjects.price)
+aa.push(pzSelectedObjects[5327238496416].price)
+delete pzSelectedObjects[5327238496416]
 
                 delete pzSelectedObjects.price
 
@@ -1251,7 +1257,36 @@ class PromizeHome extends React.Component {
                 //     }
                 // })
                 // neew code
-                let a = [34808624316576, 34808943640736]
+                var varient_id = []
+                 varient_id = [34808624316576, 34808943640736]
+
+                function priceCheck(aa){
+                    for(i=0;i<aa.length;i++){
+                    debugger; 
+                    $.ajax({
+                                    url: 'https://78f6bcc2c55c254471169a8985f2302e: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@rwgaragedoors.myshopify.com/admin/products/search.json?query=price:'+aa[i],
+                                    type: 'GET',
+                                    dataType: 'json',
+                                    success: function(response){
+                                    console.log("response", response);
+                                      let x = Object.values(response["products"][0]["variants"])
+                                      x.forEach(function(x){console.log(x);
+                                       if(x.price == aa[i]){
+                                           varient_id.push(x.id)
+                                           }
+                                           })
+                                           addAllItems(varient_id)
+                                    },
+                                    error: function() {
+                                        alert("product not created!")
+                                        }
+                                })
+                            }
+                
+                  }
+ 
+                  priceCheck(aa)
+
                 addAllItems = (array) => {
                     debugger
                     let product
@@ -1271,6 +1306,8 @@ class PromizeHome extends React.Component {
                             //     let  aa = '{"color":"red","size": "medium"}'
                             //     let test = JSON.parse(a)
                             //    let   data1  = Object.entries(test).map(([key, value]) => data[key] = value)
+
+                            
 
 
                             $.ajax({
@@ -1312,7 +1349,7 @@ class PromizeHome extends React.Component {
                     };
                     Shopify.moveAlong();
                 };
-                addAllItems(a)
+                addAllItems(varient_id)
             })
             //newcode end
         } else {
